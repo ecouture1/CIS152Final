@@ -6,7 +6,7 @@
 public class Queue {
 	
 	private int maxSize;
-	private String[] queArray;
+	private Customer[] queArray;
 	private int front;
 	private int rear;
 	private int nItems;
@@ -17,7 +17,7 @@ public class Queue {
 	public Queue(int s)
 	{
 		maxSize = s;
-		queArray = new String[maxSize];
+		queArray = new Customer[maxSize];
 		front = 0;
 		rear = -1;
 		nItems = 0;
@@ -26,25 +26,25 @@ public class Queue {
 	/**
 	 * @param str, data put into the queue
 	 */
-	public void enqueue(String str)
+	public void enqueue(Customer cust)
 	{
 		if (rear == maxSize-1)
 			rear = -1;
-		queArray[++rear] = str;
+		queArray[++rear] = cust;
 		nItems++;
 	}
 	
 	/**
 	 * @return the item at the front, decrement number of items
 	 */
-	public String dequeue()
+	public Customer dequeue()
 	{
-		String temp = queArray[front++];
+		Customer cust = queArray[front++];
 		if (front == maxSize)
 			front = 0;
 		nItems--;
 		
-		return temp;
+		return cust;
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class Queue {
 	/**
 	 * @return front item, without editing
 	 */
-	public String peek()
+	public Customer peek()
 	{
 		return queArray[front];
 	}
