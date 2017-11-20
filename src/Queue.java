@@ -1,4 +1,4 @@
-
+import java.util.Random;
 /**
  * @author Eli Couture, this class creates a queue and hosts the methods to utilise it.
  *
@@ -10,7 +10,7 @@ public class Queue {
 	private int front;
 	private int rear;
 	private int nItems;
-	
+	private Random generator = new Random();
 	/**
 	 * @param s, maxSize
 	 */
@@ -23,14 +23,25 @@ public class Queue {
 		nItems = 0;
 	}
 	
+	public void generateCustomers(Item[] arrA)
+	{
+		int count = generator.nextInt(20);
+
+		for (int i = 0; i < count; i++)
+			{
+				Customer cust = new Customer();
+				enqueue(cust, arrA);
+			}	
+	}
 	/**
 	 * @param str, data put into the queue
 	 */
-	public void enqueue(Customer cust)
+	public void enqueue(Customer cust, Item[] arrA)
 	{
 		if (rear == maxSize-1)
 			rear = -1;
 		queArray[++rear] = cust;
+		cust.generateOrder(cust.order, arrA);
 		nItems++;
 	}
 	

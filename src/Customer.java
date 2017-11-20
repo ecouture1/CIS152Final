@@ -18,14 +18,14 @@ public class Customer
 		i.setOrderQuant(q);
 	}
 	
-	public void generateOrder(Item[] arrA)
+	public void generateOrder(List<Item> o, Item[] arrA)
 	{
 		for(int i = 0; i < 5; i++)
 			{
-				int pick = generator.nextInt(arrA.length + 5);
+				int pick = generator.nextInt(o.size() + 5);
 				
-				if (pick < arrA.length)
-					addToCart(arrA[pick], generateQuant(arrA[pick]));
+				if (pick < o.size())
+					addToCart(o.get(pick), generateQuant(o.get(pick)));
 			}
 	}
 	

@@ -9,7 +9,7 @@ public class Item
 	private double price;
 	private int orderQuant;
 	
-	public Item(String n, String desc, int q, int p)
+	public Item(String n, String desc, int q, double p)
 	{
 		name = n;
 		description = desc;

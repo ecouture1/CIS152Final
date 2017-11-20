@@ -10,19 +10,12 @@ public class CheckoutTester
 		// TODO Auto-generated method stub
 
 		Queue customers = new Queue(20);
+		Item[] possibleItems = new Item[20];
+		
+		possibleItems[0] = new Item("Spray Paint", "Red, Blue, Green aerosolised paint", 30, 4.97);
+		possibleItems[1] = new Item("Snickers Candy Bar", "Peanut, Caramel, Chocolate", 30, 1.34);
+		
+		customers.generateCustomers(possibleItems);
 	}
-	
-	public void generateCustomers(Queue q)
-	{
-		for (int i = 0; i < 20; i++)
-			{
-				int pick = generator.nextInt(10);
-				
-				if (pick <= 6)
-					{
-						Customer cust = new Customer();
-						q.enqueue(cust);
-					}
-			}
-	}
+
 }
