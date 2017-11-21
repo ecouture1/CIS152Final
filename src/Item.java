@@ -29,6 +29,16 @@ public class Item
 		name = n;
 	}
 	
+	public int getMin()
+	{
+		return minQuant;
+	}
+	
+	public int getMax()
+	{
+		return maxQuant;
+	}
+	
 	public String getName()
 	{
 		return name;
@@ -72,6 +82,16 @@ public class Item
 				return false;	// if the quantity the guest wants is unavailable return false
 			}
 
+	}
+	
+	public double getPrice()
+	{
+		return price;
+	}
+	
+	public void setPrice(double p)
+	{
+		price = p;
 	}
 	
 	public void orderMore(int q)

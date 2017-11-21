@@ -3,7 +3,7 @@ import java.util.Random;
 public class CheckoutTester
 {
 	
-	Random generator = new Random();
+	
 	
 	public static void main(String[] args)
 	{
@@ -11,11 +11,25 @@ public class CheckoutTester
 
 		Queue customers = new Queue(20);
 		Item[] possibleItems = new Item[20];
+		Random generator = new Random();
 		
-		possibleItems[0] = new Item("Spray Paint", "Red, Blue, Green aerosolised paint", 30, 4.97);
-		possibleItems[1] = new Item("Snickers Candy Bar", "Peanut, Caramel, Chocolate", 30, 1.34);
+		char temp = 'A';
+		for (int i = 0; i < 20; i++)
+			{
+				int q = generator.nextInt(30) + 10;
+				double p = (generator.nextDouble() * 30) + 1;
+				p = ((int)(p*100)/100);
+				possibleItems[i] = new Item(("Object" + temp), ("Object" + temp++), q, p);
+			}
 		
 		customers.generateCustomers(possibleItems);
+		
+		while (!customers.isEmpty())
+			{
+				customers.dequeue().order();
+			}
 	}
+	
+	
 
 }

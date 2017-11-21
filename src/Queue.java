@@ -10,6 +10,7 @@ public class Queue {
 	private int front;
 	private int rear;
 	private int nItems;
+	private char na = 'A';
 	private Random generator = new Random();
 	/**
 	 * @param s, maxSize
@@ -25,11 +26,11 @@ public class Queue {
 	
 	public void generateCustomers(Item[] arrA)
 	{
-		int count = generator.nextInt(20);
+		int count = generator.nextInt(20) + 1;
 
 		for (int i = 0; i < count; i++)
 			{
-				Customer cust = new Customer();
+				Customer cust = new Customer(genName());
 				enqueue(cust, arrA);
 			}	
 	}
@@ -41,7 +42,7 @@ public class Queue {
 		if (rear == maxSize-1)
 			rear = -1;
 		queArray[++rear] = cust;
-		cust.generateOrder(cust.order, arrA);
+		cust.generateOrder(arrA);
 		nItems++;
 	}
 	
@@ -104,5 +105,20 @@ public class Queue {
 			if (item == maxSize) // accounts for wraparound
 				item = 0;
 		}
+	}
+	
+	public String genName()
+	{
+		String temp;
+		if (na == 'Z')
+			{
+				temp = ("CustomerZA");
+				na = ('A' - 1);
+			}
+		else
+			temp = ("Customer" + na + (na+1));
+		
+		na++;
+		return temp;
 	}
 }
