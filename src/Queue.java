@@ -5,15 +5,17 @@ import java.util.Random;
  */
 public class Queue {
 	
-	private int maxSize;
-	private Customer[] queArray;
+	private int maxSize;			// this Is mostly repurposed code from the Queue assignment.
+	private Customer[] queArray;    // It was more efficient to change it than make it from scratch.
 	private int front;
 	private int rear;
 	private int nItems;
-	private char na = 'A';
+	private char na = 'A';			// part of Customer name generation
+	
 	private Random generator = new Random();
+	
 	/**
-	 * @param s, maxSize
+	 * @param s, maxSize, creates a Queue of maxSize length
 	 */
 	public Queue(int s)
 	{
@@ -24,25 +26,27 @@ public class Queue {
 		nItems = 0;
 	}
 	
-	public void generateCustomers(Item[] arrA)
+	/**
+	 * @param arrA, the Item array possibleItems from the testing class
+	 */
+	public void generateCustomers(Item[] arrA)		
 	{
-		int count = generator.nextInt(20) + 1;
+		int count = generator.nextInt(10) + 1; // how many customers there will be in this "runthrough"
 
 		for (int i = 0; i < count; i++)
 			{
-				Customer cust = new Customer(genName());
-				enqueue(cust, arrA);
+				Customer cust = new Customer(genName(), arrA);	// create a customer
+				enqueue(cust);									// put customer into queue
 			}	
 	}
 	/**
-	 * @param str, data put into the queue
+	 * @param cust, Customer to be put into queue
 	 */
-	public void enqueue(Customer cust, Item[] arrA)
+	public void enqueue(Customer cust)
 	{
 		if (rear == maxSize-1)
 			rear = -1;
 		queArray[++rear] = cust;
-		cust.generateOrder(arrA);
 		nItems++;
 	}
 	
@@ -94,7 +98,7 @@ public class Queue {
 	/**
 	 *   Prints out entire queue without editing
 	 */
-	public void print()
+	public void print()											// deprecated code. needs to deleted or changed before use
 	{
 		int item = front; // the array starts at the front
 		
@@ -107,11 +111,14 @@ public class Queue {
 		}
 	}
 	
+	/**
+	 * @return string to use as Customer name
+	 */
 	public String genName()
 	{
 		String temp;
-		if (na == 'Z')
-			{
+		if (na == 'Z')					// not sure if works as intended, but works perfectly fine for
+			{							// what i need it to do. will check out and edit later for efficiency.
 				temp = ("CustomerZA");
 				na = ('A' - 1);
 			}

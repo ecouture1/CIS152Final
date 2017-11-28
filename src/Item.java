@@ -1,4 +1,8 @@
 
+/**
+ * @author Eli Couture, creates and hosts methods for an Item
+ *
+ */
 public class Item
 {
 	private int quantity;
@@ -9,62 +13,99 @@ public class Item
 	private double price;
 	private int orderQuant;
 	
+	/**
+	 * @param n, name
+	 * @param desc, description
+	 * @param q, quantity
+	 * @param p, price
+	 */
 	public Item(String n, String desc, int q, double p)
 	{
 		name = n;
 		description = desc;
-		quantity = q;
-		maxQuant = q;
-		minQuant = (quantity/5) + 1;
+		quantity = q;					// original quantity is the max quantity
+		maxQuant = q;					// set to reflect that
+		minQuant = (quantity/5) + 1;    // minimum quantity is 1/5 of the quantity, truncated to int always rounded up.
 		price = p;
 	}
 	
+	/**
+	 * @return quantity
+	 */
 	public int getQuant()
 	{
 		return quantity;
 	}
 	
+	/**
+	 * @param n, name
+	 */
 	public void setName(String n)
 	{
 		name = n;
 	}
 	
+	/**
+	 * @return minQuant - read only
+	 */
 	public int getMin()
 	{
 		return minQuant;
 	}
 	
+	/**
+	 * @return maxQuant - read only
+	 */
 	public int getMax()
 	{
 		return maxQuant;
 	}
 	
+	/**
+	 * @return name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 	
+	/**
+	 * @return orderQuant
+	 */
 	public int getOrderQuant()
 	{
 		return orderQuant;
 	}
 	
-	public void setOrderQuant(int i)
+	/**
+	 * @param q
+	 */
+	public void setOrderQuant(int q)
 	{
-		orderQuant = i;
+		orderQuant = q; // each customer will order an individual amount of items.
 	}
 	
+	/**
+	 * @param d
+	 */
 	public void setDesc(String d)
 	{
 		description = d;
 	}
 	
+	/**
+	 * @return description
+	 */
 	public String getDesc()
 	{
 		return description;
 	}
 	
-	public int custOrder1(int q)
+	/**
+	 * @param q, quantity
+	 * @return 1, 2, or 3 depending on end quantity
+	 */
+	public int custOrder1(int q) // does not remove quantity at all, peeks to see if allowed
 	{
 		if ((quantity - q) > 0)					
 			if ((quantity - q) <= minQuant)
@@ -82,22 +123,34 @@ public class Item
 
 	}
 	
-	public void custOrder2(int q)
+	/**
+	 * @param q
+	 */
+	public void custOrder2(int q) // actually orders items
 	{
 		quantity -= q;
 	}
 	
+	/**
+	 * @return price 
+	 */
 	public double getPrice()
 	{
 		return price;
 	}
 	
+	/**
+	 * @param p
+	 */
 	public void setPrice(double p)
 	{
 		price = p;
 	}
 	
-	public void orderMore(int q)
+	/**
+	 * @param q
+	 */
+	public void orderMore(int q) // Stack/Manager order more, puts quantity back up to full.
 	{
 		quantity = maxQuant;
 	}

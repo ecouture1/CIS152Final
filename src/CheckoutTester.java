@@ -1,5 +1,9 @@
 import java.util.Random;
 
+/**
+ * @author Eli Couture, tests methods from other classes
+ *
+ */
 public class CheckoutTester
 {
 	
@@ -20,10 +24,14 @@ public class CheckoutTester
 		
 		while (!customers.isEmpty())
 			{
-				customers.dequeue().order();
+				customers.dequeue().order(); // takes the customer at front and "sends it through the checkout"
 			}
 	}
 	
+	/**
+	 * @param Random generator, to keep encapsulation it is not a public generator
+	 * @return Item[] filled with procedurally generated Items
+	 */
 	public static Item[] genItemArr(Random generator)
 	{
 		char temp = 'A';
