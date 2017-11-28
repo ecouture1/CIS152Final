@@ -1,42 +1,45 @@
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.List;
 
 public class Customer
 {
-	List<Item> order;
+	Item[] order;
 	Random generator = new Random();
 	private String name;
+	private int orderQuant;
 	
 	public Customer(String nam)
 	{
-		order = new ArrayList<Item>();
 		name = nam;
+		orderQuant = (generator.nextInt(10) + 1);
+		order = new Item[orderQuant];
 	}
 	
-	public void addToCart(Item i, int q) // NOT DONE NEED TO COMPLETE TO HANDLE ITEM QUANTITIES
+	public void addToCart(Item i, int q, int loc) // NOT DONE NEED TO COMPLETE TO HANDLE ITEM QUANTITIES
 	{
-		int o = i.getQuant();
+	/*	int o = i.getQuant();
 		
 		if (o <= i.getMin())
 			{
-				
+				Email to Manager. 
 			}
 		else if (o - q <= i.getMin())
 			{
-				order.add(i);
+				order[loc] = i;
 				i.setOrderQuant(q);
-			}
+			}*/
+		
+		order[loc] = i;
+		i.setOrderQuant(q);
+		i.custOrder1(q);
+		i.custOrder2(q);
 	}
 	
 	public void generateOrder(Item[] arrA)
 	{
-		for(int i = 0; i < (generator.nextInt(5) + 1); i++)
+		for(int i = 0; i < orderQuant; i++)
 			{
 				int pick = generator.nextInt(arrA.length);
-				
-				if (pick < arrA.length)
-					addToCart(arrA[pick], generateQuant());
+				addToCart(arrA[pick], generateQuant(), i);
 			}
 	}
 	
@@ -58,18 +61,18 @@ public class Customer
 	
 	public void clearOrders()
 	{
-		for (int i = 0; i < order.size(); i++)
-			order.remove(i);
+		for (Item curr : order)
+			curr = null;
 	}
 	
 	public void order()
 	{
-		System.out.println(name + " Bought " + order.size() + " item(s).");
+		System.out.println(name + " Bought " + order.length + " item(s).");
 		System.out.println("\t\t\tName\t\tPrice\t\tQuant\t\tExtended Price\n");
 		
 		for (Item current : order)
 			{
-				System.out.println("\t\t\t" + current.getName() + "\t\t" + current.getPrice() + "\t\t" + current.getOrderQuant() + "\t\t" + (current.getPrice() * current.getOrderQuant()));
+				System.out.println("\t\t\t" + current.getName() + "\t\t" + current.getPrice() + "\t\t" + current.getOrderQuant() + "\t\t" + (current.getPrice() * current.getOrderQuant() + "\t\t" + current.getQuant()));
 			}
 		System.out.println("\n");
 	}

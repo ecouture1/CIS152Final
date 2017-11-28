@@ -64,24 +64,27 @@ public class Item
 		return description;
 	}
 	
-	public boolean custOrder(int q)
+	public int custOrder1(int q)
 	{
 		if ((quantity - q) > 0)					
 			if ((quantity - q) <= minQuant)
 				{
-					quantity -= q;
-					return false;		// return false if after removing the quantity, it is now less than 1/5
+					return 1;		// return 1 if after removing the quantity, it is now less than 1/5
 				}
 			else
 				{
-					quantity -= q;
-					return true;	// quantity is above 0 and above 1/5 after removing, return true
+					return 2;	// quantity is above 0 and above 1/5 after removing, return true
 				}
 		else
 			{
-				return false;	// if the quantity the guest wants is unavailable return false
+				return 0;	// if the quantity the guest wants is unavailable return false
 			}
 
+	}
+	
+	public void custOrder2(int q)
+	{
+		quantity -= q;
 	}
 	
 	public double getPrice()
