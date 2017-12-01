@@ -14,17 +14,28 @@ public class CheckoutTester
 		// TODO Auto-generated method stub
 
 		Queue customers = new Queue(20);
+		GMstack manager = new GMstack(21);
 		Item[] possibleItems = new Item[20];
 		Random generator = new Random();
 		
-
+		
 		possibleItems = genItemArr(generator);
 		
-		customers.generateCustomers(possibleItems);
+		customers.generateCustomers(possibleItems, manager);
 		
+		
+		for (Item cur : possibleItems)
+			System.out.println("Name: " + cur.getName() + "\t\tQty: " + cur.getQuant());
+		
+		System.out.println("\n\n");
 		while (!customers.isEmpty())
 			{
 				customers.dequeue().order(); // takes the customer at front and "sends it through the checkout"
+			}
+		System.out.println("\n\n\n\n\n\n\n");
+		while (!manager.isEmpty())
+			{
+				manager.pop();
 			}
 	}
 	
@@ -39,7 +50,7 @@ public class CheckoutTester
 		
 		for (int i = 0; i < 20; i++)
 			{
-				int q = generator.nextInt(30) + 10;
+				int q = generator.nextInt(30) + 20;
 				double p = (generator.nextDouble() * 30) + 1;
 				p = ((int)(p*100)/100);
 				pi[i] = new Item(("Object" + temp), ("Object" + temp++), q, p);

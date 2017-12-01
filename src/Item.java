@@ -150,8 +150,13 @@ public class Item
 	/**
 	 * @param q
 	 */
-	public void orderMore(int q) // Stack/Manager order more, puts quantity back up to full.
+	public void orderMore() // Stack/Manager order more, puts quantity back up to full.
 	{
 		quantity = maxQuant;
+	}
+	
+	public String toString()
+	{
+		return name + " is back to full";
 	}
 }

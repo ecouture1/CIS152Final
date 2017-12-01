@@ -29,13 +29,13 @@ public class Queue {
 	/**
 	 * @param arrA, the Item array possibleItems from the testing class
 	 */
-	public void generateCustomers(Item[] arrA)		
+	public void generateCustomers(Item[] arrA, GMstack GM)		
 	{
 		int count = generator.nextInt(10) + 1; // how many customers there will be in this "runthrough"
 
 		for (int i = 0; i < count; i++)
 			{
-				Customer cust = new Customer(genName(), arrA);	// create a customer
+				Customer cust = new Customer(genName(), arrA, GM);	// create a customer
 				enqueue(cust);									// put customer into queue
 			}	
 	}

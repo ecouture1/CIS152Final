@@ -15,12 +15,12 @@ public class Customer
 	 * @param nam, name
 	 * @param arrA, possibleItems array from CheckoutTester class
 	 */
-	public Customer(String nam, Item[] arrA)
+	public Customer(String nam, Item[] arrA, GMstack GM)
 	{
 		name = nam;
 		orderItemsQuant = (generator.nextInt(10) + 1);
 		order = new Item[orderItemsQuant];
-		this.generateOrder(arrA);			// creates an order as soon as the customer is created
+		this.generateOrder(arrA, GM);			// creates an order as soon as the customer is created
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public class Customer
 	 * @param q, quantity to be orderd
 	 * @param loc, index item should be placed in
 	 */
-	public void addToCart(Item i, int q, int loc)
+	public void addToCart(Item i, int q, int loc, GMstack GM)
 	{ 
 		
 		if (i.custOrder1(q) == 2) // Item is above minimum Quantity AFTER ordering items
@@ -43,11 +43,12 @@ public class Customer
 				i.setOrderQuant(q);
 				i.custOrder2(q);
 				
-				//////////////// Stack.Push(i) -------- not implemented --- pseudocode
+				//GM.push(i);
 			}
 		else
 			{
-				order[loc] = new Item("null", i.getName(), 0, 0); // fills the array with dummy items to show missed sales
+				order[loc] = new Item("null", i.getName(), q, 0); // fills the array with dummy items to show missed sales
+				//GM.push(i);
 			}
 			
 	}
@@ -55,20 +56,20 @@ public class Customer
 	/**
 	 * @param arrA, possibleItems array from CheckoutTester class
 	 */
-	public void generateOrder(Item[] arrA)
+	public void generateOrder(Item[] arrA, GMstack GM)
 	{
 
 		for(int i = 0; i < orderItemsQuant; i++)
 			{
 				int pick = generator.nextInt(arrA.length); // picks item from the array of possibleItems, want to implement way to not duplicate items.
-				addToCart(arrA[pick], generateQuant(), i); // adds the item to the Customer's Item array 'order'
+				addToCart(arrA[pick], generateQuant(arrA[pick]), i, GM); // adds the item to the Customer's Item array 'order'
 			}
 	}
 	
 	/**
 	 * @return int, between 1 and 10 inclusive
 	 */
-	public int generateQuant()
+	public int generateQuant(Item cur)
 	{
 		int orderQuant = (generator.nextInt(10) + 1);
 		return orderQuant;
@@ -110,9 +111,11 @@ public class Customer
 		for (Item current : order)
 			{
 				if (current.getName().indexOf("null") >= 0) // all dummy items in order will have a name of "null". String.equals(String) wasn't working for an unknown reason.
-					System.out.println("\t\t\tNot Enough Quantity of " + current.getDesc() + " for " + this.getName() + " to Order.");
+					System.out.print("\n\t\t\tNot Enough Quantity of " + current.getDesc() + " for " + this.getName() + " to Order.");
 				else
-					System.out.println("\t\t\t" + current.getName() + "\t\t" + current.getPrice() + "\t\t" + current.getOrderQuant() + "\t\t" + (current.getPrice() * current.getOrderQuant() + "\t\t" + current.getQuant()));
+					System.out.print("\n\t\t\t" + current.getName() + "\t\t" + current.getPrice() + "\t\t" + current.getOrderQuant() + "\t\t" + (current.getPrice() * current.getOrderQuant() + "\t\t" + current.getQuant()));
+				if (current.getQuant() <= current.getMin() && current.getName().indexOf("null") < 0)
+					System.out.print("\t!**!");
 			}
 		System.out.println("\n");
 	}
