@@ -18,7 +18,7 @@ public class Customer
 	public Customer(String nam, Item[] arrA, GMstack GM)
 	{
 		name = nam;
-		orderItemsQuant = (generator.nextInt(10) + 1);
+		orderItemsQuant = (generator.nextInt(5) + 1);
 		order = new Item[orderItemsQuant];
 		this.generateOrder(arrA, GM);			// creates an order as soon as the customer is created
 	}
@@ -30,25 +30,26 @@ public class Customer
 	 */
 	public void addToCart(Item i, int q, int loc, GMstack GM)
 	{ 
+		int itemQuantTest = i.custOrder1(q);
 		
-		if (i.custOrder1(q) == 2) // Item is above minimum Quantity AFTER ordering items
+		if (itemQuantTest == 2) // Item is above minimum Quantity AFTER ordering items
 			{
 				order[loc] = i;
 				i.setOrderQuant(q);
 				i.custOrder2(q);
 			}
-		else if (i.custOrder1(q) == 1) // Item is above 0, below Minimum Quantity AFTER ordering items
+		else if (itemQuantTest == 1) // Item is above 0, below Minimum Quantity AFTER ordering items
 			{
 				order[loc] = i;
 				i.setOrderQuant(q);
 				i.custOrder2(q);
 				
-				//GM.push(i);
+				GM.push(i);
 			}
 		else
 			{
 				order[loc] = new Item("null", i.getName(), q, 0); // fills the array with dummy items to show missed sales
-				//GM.push(i);
+				GM.push(i);
 			}
 			
 	}
@@ -94,6 +95,7 @@ public class Customer
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	public void clearOrders() // untested, possibly not needed in any way shape or form.
 	{
 		for (Item curr : order)
@@ -107,16 +109,24 @@ public class Customer
 	{
 		System.out.println(name + " Bought " + order.length + " item(s)."); // does not account for items not having enough quantity to purchase
 		System.out.println("\t\t\tName\t\tPrice\t\tQuant\t\tExtended Price\n"); // labels
+		double totalPrice = 0;
 		
 		for (Item current : order)
 			{
 				if (current.getName().indexOf("null") >= 0) // all dummy items in order will have a name of "null". String.equals(String) wasn't working for an unknown reason.
 					System.out.print("\n\t\t\tNot Enough Quantity of " + current.getDesc() + " for " + this.getName() + " to Order.");
 				else
-					System.out.print("\n\t\t\t" + current.getName() + "\t\t" + current.getPrice() + "\t\t" + current.getOrderQuant() + "\t\t" + (current.getPrice() * current.getOrderQuant() + "\t\t" + current.getQuant()));
-				if (current.getQuant() <= current.getMin() && current.getName().indexOf("null") < 0)
+					{
+						int oQuant = current.getOrderQuant();
+						double extendedPrice = (current.getPrice() * oQuant);
+						
+						System.out.print("\n\t\t\t" + current.getName() + "\t\t" + current.getPrice() + "\t\t" + oQuant + "\t\t" + extendedPrice + "\t\t" + current.quantPrint(oQuant));
+						totalPrice += extendedPrice;
+					}
+				if (current.getQuantPrint() <= current.getMin() && current.getName().indexOf("null") < 0)
 					System.out.print("\t!**!");
 			}
-		System.out.println("\n");
+		System.out.println("\n\n\t\t\t\t\t\t\t\t Total: " + totalPrice + "\n\n");
+		
 	}
 }

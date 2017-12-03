@@ -17,6 +17,8 @@ public class GMstack {
 	{
 		maxSize = s;
 		stackArray = new Item[maxSize];
+		for (int i = 0; i < stackArray.length; i++)
+			stackArray[i] = new Item("", "", 0, 0);
 		top = -1;
 	}
 	
@@ -25,6 +27,14 @@ public class GMstack {
 	 */
 	public void push(Item piece)
 	{
+		boolean itemAlreadyInArray = false;
+		for (Item curr : stackArray)
+			{
+				if (curr.getName().equals(piece.getName()))
+					itemAlreadyInArray = true;
+			}
+			
+		if (!itemAlreadyInArray)
 			stackArray[++top] = piece;
 	}
 	

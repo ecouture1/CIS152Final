@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author Eli Couture, creates and hosts methods for an Item
@@ -10,8 +12,10 @@ public class Item
 	private String description;
 	private int minQuant;
 	private int maxQuant;
+	private int QuantPrint;
 	private double price;
-	private int orderQuant;
+	private List<Integer> orderQuants = new ArrayList<Integer>();
+	private int orderQuantsLoc = 0;
 	
 	/**
 	 * @param n, name
@@ -26,6 +30,7 @@ public class Item
 		quantity = q;					// original quantity is the max quantity
 		maxQuant = q;					// set to reflect that
 		minQuant = (quantity/5) + 1;    // minimum quantity is 1/5 of the quantity, truncated to int always rounded up.
+		QuantPrint = maxQuant;
 		price = p;
 	}
 	
@@ -74,7 +79,9 @@ public class Item
 	 */
 	public int getOrderQuant()
 	{
-		return orderQuant;
+		int x = orderQuants.get(orderQuantsLoc);
+		orderQuantsLoc++;
+		return x;
 	}
 	
 	/**
@@ -82,7 +89,7 @@ public class Item
 	 */
 	public void setOrderQuant(int q)
 	{
-		orderQuant = q; // each customer will order an individual amount of items.
+		orderQuants.add(q); // each customer will order an individual amount of items.
 	}
 	
 	/**
@@ -158,5 +165,17 @@ public class Item
 	public String toString()
 	{
 		return name + " is back to full";
+	}
+	
+	public int quantPrint(int q) // tracking/testing method. unaffected until print sequence. returns quantity after ordering.
+	{
+		QuantPrint -= q;
+		int x = QuantPrint;
+		return x;
+	}
+	
+	public int getQuantPrint()
+	{
+		return QuantPrint;
 	}
 }

@@ -21,11 +21,10 @@ public class CheckoutTester
 		
 		possibleItems = genItemArr(generator);
 		
-		customers.generateCustomers(possibleItems, manager);
-		
-		
 		for (Item cur : possibleItems)
 			System.out.println("Name: " + cur.getName() + "\t\tQty: " + cur.getQuant());
+		
+		customers.generateCustomers(possibleItems, manager);
 		
 		System.out.println("\n\n");
 		while (!customers.isEmpty())
