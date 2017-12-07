@@ -45,8 +45,10 @@ public class GMstack {
 	{
 		if (!this.isEmpty())
 			{
-				stackArray[top].orderMore();
-				System.out.println(stackArray[top--]);
+				System.out.println(stackArray[top--] + ".");
+				
+				if (top != -1)
+					stackArray[top].orderMore();
 			}
 		else
 			System.out.println("Can't remove: stack is empty.");
