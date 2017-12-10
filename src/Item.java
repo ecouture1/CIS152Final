@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class Item
 {
 	private int quantity;
-	private String name;
+	private String name; 
 	private String description;
-	private int minQuant;
-	private int maxQuant;
+	private final int minQuant;
+	private final int maxQuant;
 	private int QuantPrint;
 	private double price;
 	private List<Integer> orderQuants = new ArrayList<Integer>();
@@ -164,7 +164,10 @@ public class Item
 	
 	public String toString()
 	{
-		return name + " is back to full";
+		int q = QuantPrint;
+		QuantPrint = maxQuant;
+		
+		return name + " is back to full from " + q + " out of " + maxQuant;
 	}
 	
 	public int quantPrint(int q) // tracking/testing method. unaffected until print sequence. returns quantity after ordering.

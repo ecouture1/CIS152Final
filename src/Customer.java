@@ -15,7 +15,7 @@ public class Customer
 	 * @param nam, name
 	 * @param arrA, possibleItems array from CheckoutTester class
 	 */
-	public Customer(String nam, Item[] arrA, GMstack GM)
+	public Customer(String nam, Item[] arrA, GMstack GM) 
 	{
 		name = nam;
 		orderItemsQuant = (generator.nextInt(5) + 1);

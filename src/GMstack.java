@@ -15,7 +15,7 @@ public class GMstack {
 	 */
 	public GMstack(int s)
 	{
-		maxSize = s;
+		maxSize = s; 
 		stackArray = new Item[maxSize];
 		for (int i = 0; i < stackArray.length; i++)
 			stackArray[i] = new Item("", "", 0, 0);
@@ -45,8 +45,10 @@ public class GMstack {
 	{
 		if (!this.isEmpty())
 			{
-				stackArray[top].orderMore();
-				System.out.println(stackArray[top--]);
+				System.out.println(stackArray[top--] + ".");
+				
+				if (top != -1)
+					stackArray[top].orderMore();
 			}
 		else
 			System.out.println("Can't remove: stack is empty.");
