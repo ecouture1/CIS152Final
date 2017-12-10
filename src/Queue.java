@@ -8,7 +8,7 @@ public class Queue {
 	private int maxSize;			// this Is mostly repurposed code from the Queue assignment.
 	private Customer[] queArray;    // It was more efficient to change it than make it from scratch.
 	private int front;
-	private int rear;
+	private int rear; 
 	private int nItems;
 	private char na = 'A';			// part of Customer name generation
 	

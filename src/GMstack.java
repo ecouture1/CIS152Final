@@ -15,7 +15,7 @@ public class GMstack {
 	 */
 	public GMstack(int s)
 	{
-		maxSize = s;
+		maxSize = s; 
 		stackArray = new Item[maxSize];
 		for (int i = 0; i < stackArray.length; i++)
 			stackArray[i] = new Item("", "", 0, 0);

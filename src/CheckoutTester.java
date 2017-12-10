@@ -3,13 +3,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * @author Eli Couture, tests methods from other classes
+ * @author Eli Couture, tests methods from other classes 
  *
  */
 public class CheckoutTester
 {
 	
-	static Queue customers = new Queue(20);
+	static Queue customers = new Queue(20); 
 	static GMstack manager = new GMstack(21);
 	static Item[] possibleItems = new Item[20];
 	static boolean endProgram = false;
@@ -40,7 +40,7 @@ public class CheckoutTester
 			runDay();
 			
 			System.out.print("\nWould you like to quit? If YES, type q and then hit enter. If NO, type anything else and enter. ");
-			String in = reader.next();
+			String in = reader.next(); 
 			
 			if (in.equals("q"))
 				endProgram = true;

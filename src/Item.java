@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Item
 {
 	private int quantity;
-	private String name;
+	private String name; 
 	private String description;
 	private final int minQuant;
 	private final int maxQuant;
